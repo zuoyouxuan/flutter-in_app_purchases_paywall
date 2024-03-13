@@ -31,29 +31,37 @@ class SimplePaywallPurchase extends StatelessWidget {
       children: [
         const GutterColumn(),
         PageDivider2(
-            first: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              const GutterColumn(),
-              Text(
-                paywallData.title ?? PaywallL10NHelper.of(context).app_bar_default_title,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
+            first: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const GutterColumn(),
+                  Text(
+                    paywallData.title ??
+                        PaywallL10NHelper.of(context).app_bar_default_title,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
 
-              // add SubTitle
-              if (paywallData.subTitle != null) Text(paywallData.subTitle!, style: Theme.of(context).textTheme.bodyMedium),
+                  // add SubTitle
+                  if (paywallData.subTitle != null)
+                    Text(paywallData.subTitle!,
+                        style: Theme.of(context).textTheme.bodySmall),
 
-              const GutterColumn(),
+                  const GutterColumn(),
 
-              if (paywallData.bulletPoints != null) SimpleBulletPoints(paywallData.bulletPoints!),
-            ]),
+                  if (paywallData.bulletPoints != null)
+                    SimpleBulletPoints(paywallData.bulletPoints!),
+                ]),
             second: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const GutterColumn(),
-                if (paywallData.campaignWidget != null) paywallData.campaignWidget!,
+                if (paywallData.campaignWidget != null)
+                  paywallData.campaignWidget!,
                 const GutterColumn(),
                 if (inheritedWidget.subscriptionListData != null)
                   SubscriptionRow(
-                      subscriptionListData: inheritedWidget.subscriptionListData!,
+                      subscriptionListData:
+                          inheritedWidget.subscriptionListData!,
                       isSubscriptionLoading: isSubscriptionLoading),
                 const GutterColumn(),
                 Row(
@@ -61,7 +69,8 @@ class SimplePaywallPurchase extends StatelessWidget {
                   children: [
                     TextButton(
                       child: Text(
-                        paywallData.restoreText ?? PaywallL10NHelper.of(context).restore_purchase,
+                        paywallData.restoreText ??
+                            PaywallL10NHelper.of(context).restore_purchase,
                       ),
                       style: Theme.of(context).textButtonTheme.style,
                       onPressed: () {
