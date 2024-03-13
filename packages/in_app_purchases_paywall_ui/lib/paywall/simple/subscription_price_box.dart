@@ -61,7 +61,19 @@ class SubscriptionPriceBox extends StatelessWidget {
                                             .textTheme
                                             .titleMedium,
                                       ),
-                                    )
+                                    ),
+                                    Container(
+                                      padding:
+                                          EdgeInsets.all(context.spacing.s),
+                                    ),
+                                    if (data.highlightText != null)
+                                      Text(
+                                        data.highlightText!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(fontSize: 12),
+                                      ),
                                   ],
                                 ),
                               ),
