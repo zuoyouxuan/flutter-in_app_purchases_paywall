@@ -12,7 +12,10 @@ class SubscriptionRow extends StatelessWidget {
   bool _shouldBreakText = false;
   int _boxMarginX = 4;
 
-  SubscriptionRow({required this.subscriptionListData, required this.isSubscriptionLoading, super.key}) {
+  SubscriptionRow(
+      {required this.subscriptionListData,
+      required this.isSubscriptionLoading,
+      super.key}) {
     if (subscriptionListData.length >= 3) {
       _shouldBreakText = true;
       _boxMarginX = 1;
@@ -32,8 +35,11 @@ class SubscriptionRow extends StatelessWidget {
     // we do some crazy magic here
     // it probably cant be done differently :)
     List<List<Widget>> widgetList = subscriptionListData
-        .map((subscriptionData) =>
-            [SubscriptionPriceBox(subscriptionData, _shouldBreakText, mx: _boxMarginX), GutterRow()])
+        .map((subscriptionData) => [
+              SubscriptionPriceBox(subscriptionData, _shouldBreakText,
+                  mx: _boxMarginX),
+              GutterRow()
+            ])
         .toList(growable: true);
 
     // spread the list and remove last object
@@ -43,7 +49,8 @@ class SubscriptionRow extends StatelessWidget {
       while (widgetList.isNotEmpty) {
         widgetRows.add(Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [for (final listItem in widgetList.take(2)) ...listItem]..removeLast()));
+            children: [for (final listItem in widgetList.take(2)) ...listItem]
+              ..removeLast()));
         widgetRows.add(const GutterColumn());
         if (widgetList.length > 1) {
           widgetList.removeRange(0, 2);
@@ -57,7 +64,8 @@ class SubscriptionRow extends StatelessWidget {
       );
     }
     return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [for (final listItem in widgetList) ...listItem]..removeLast());
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [for (final listItem in widgetList) ...listItem]
+          ..removeLast());
   }
 }
