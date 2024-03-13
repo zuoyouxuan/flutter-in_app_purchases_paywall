@@ -41,16 +41,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBarTitle: "Premium",
       child: SimplePaywall(
           // set a custom header
-          headerContainer: Container(
-              margin: EdgeInsets.all(16),
-              height: 100,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      alignment: FractionalOffset.center,
-                      image: AssetImage('assets/images/premium_bg.png'))),
-              child: Container()),
+          // headerContainer: Container(
+          //     margin: EdgeInsets.all(16),
+          //     height: 100,
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          //         image: DecorationImage(
+          //             fit: BoxFit.cover,
+          //             alignment: FractionalOffset.center,
+          //             image: AssetImage('assets/images/premium_bg.png'))),
+          //     child: Container()),
           // Title Bar
           title: "Go Premium",
           // SubTitle

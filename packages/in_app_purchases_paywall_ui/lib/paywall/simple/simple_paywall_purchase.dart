@@ -29,28 +29,30 @@ class SimplePaywallPurchase extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const GutterColumn(),
+        // const GutterColumn(),
         PageDivider2(
             first: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const GutterColumn(),
-                  Text(
-                    paywallData.title ??
-                        PaywallL10NHelper.of(context).app_bar_default_title,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  paywallData.title ??
+                      PaywallL10NHelper.of(context).app_bar_default_title,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
 
-                  // add SubTitle
-                  if (paywallData.subTitle != null)
-                    Text(paywallData.subTitle!,
-                        style: Theme.of(context).textTheme.bodySmall),
+                // add SubTitle
+                if (paywallData.subTitle != null)
+                  Text(paywallData.subTitle!,
+                      style: Theme.of(context).textTheme.bodySmall),
 
-                  const GutterColumn(),
+                const GutterColumn(),
 
-                  if (paywallData.bulletPoints != null)
-                    SimpleBulletPoints(paywallData.bulletPoints!),
-                ]),
+                if (paywallData.bulletPoints != null)
+                  SimpleBulletPoints(paywallData.bulletPoints!),
+              ],
+            ),
             second: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
