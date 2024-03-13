@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/model/paywall_data.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Simple Legal Row with TOS and PP
 class LegalRow extends StatelessWidget {
@@ -18,12 +18,16 @@ class LegalRow extends StatelessWidget {
             padding: EdgeInsets.only(left: 2, right: 2),
             child: GestureDetector(
               onTap: () async {
-                final ChromeSafariBrowser browser = ChromeSafariBrowser();
-                await browser.open(
-                    url: Uri.parse(PaywallData.of(context).tosData!.url),
-                    options: ChromeSafariBrowserClassOptions(
-                        android: AndroidChromeCustomTabsOptions(),
-                        ios: IOSSafariOptions(barCollapsingEnabled: true)));
+                await launchUrl(
+                  Uri.parse(PaywallData.of(context).tosData!.url),
+                );
+                // final ChromeSafariBrowser browser = ChromeSafariBrowser();
+                //
+                // await browser.open(
+                //     url: Uri.parse(PaywallData.of(context).tosData!.url),
+                //     options: ChromeSafariBrowserClassOptions(
+                //         android: AndroidChromeCustomTabsOptions(),
+                //         ios: IOSSafariOptions(barCollapsingEnabled: true)));
               },
               child: Text(
                 tosData.name,
@@ -31,7 +35,8 @@ class LegalRow extends StatelessWidget {
                     decoration: TextDecoration.underline,
                     color: Theme.of(context).textTheme.labelLarge?.color ??
                         Theme.of(context).primaryColor,
-                    fontStyle: Theme.of(context).textTheme.bodySmall!.fontStyle),
+                    fontStyle:
+                        Theme.of(context).textTheme.bodySmall!.fontStyle),
               ),
             ),
           ),
@@ -40,12 +45,15 @@ class LegalRow extends StatelessWidget {
             padding: EdgeInsets.only(left: 2, right: 2),
             child: GestureDetector(
               onTap: () async {
-                final ChromeSafariBrowser browser = ChromeSafariBrowser();
-                await browser.open(
-                    url: Uri.parse(ppData.url),
-                    options: ChromeSafariBrowserClassOptions(
-                        android: AndroidChromeCustomTabsOptions(),
-                        ios: IOSSafariOptions(barCollapsingEnabled: true)));
+                await launchUrl(
+                  Uri.parse(ppData.url),
+                );
+                // final ChromeSafariBrowser browser = ChromeSafariBrowser();
+                // await browser.open(
+                //     url: Uri.parse(ppData.url),
+                //     options: ChromeSafariBrowserClassOptions(
+                //         android: AndroidChromeCustomTabsOptions(),
+                //         ios: IOSSafariOptions(barCollapsingEnabled: true)));
               },
               child: Text(
                 ppData.name,
@@ -53,7 +61,8 @@ class LegalRow extends StatelessWidget {
                     decoration: TextDecoration.underline,
                     color: Theme.of(context).textTheme.labelLarge?.color ??
                         Theme.of(context).primaryColor,
-                    fontStyle: Theme.of(context).textTheme.bodySmall!.fontStyle),
+                    fontStyle:
+                        Theme.of(context).textTheme.bodySmall!.fontStyle),
               ),
             ),
           )
