@@ -59,7 +59,7 @@ class SubscriptionPriceBox extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyMedium,
+                                            .titleMedium,
                                       ),
                                     )
                                   ],
