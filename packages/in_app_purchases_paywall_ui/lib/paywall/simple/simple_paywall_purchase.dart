@@ -27,7 +27,7 @@ class SimplePaywallPurchase extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const GutterColumn(),
         PageDivider2(
@@ -53,6 +53,8 @@ class SimplePaywallPurchase extends StatelessWidget {
                 ]),
             second: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const GutterColumn(),
                 if (paywallData.campaignWidget != null)
