@@ -59,12 +59,16 @@ class SubscriptionRow extends StatelessWidget {
         }
       }
       return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [...widgetRows..removeLast()],
       );
     }
     return Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [for (final listItem in widgetList) ...listItem]
           ..removeLast());
   }
