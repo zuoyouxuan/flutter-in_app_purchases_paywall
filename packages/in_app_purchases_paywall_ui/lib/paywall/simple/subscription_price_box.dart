@@ -9,14 +9,16 @@ class SubscriptionPriceBox extends StatelessWidget {
   final bool shouldBreakText;
   final int mx;
 
-  const SubscriptionPriceBox(this.data, this.shouldBreakText, {this.mx = 1, super.key});
+  const SubscriptionPriceBox(this.data, this.shouldBreakText,
+      {this.mx = 1, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Ink(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)), color: Theme.of(context).colorScheme.primary),
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                color: Theme.of(context).colorScheme.primary),
             child: InkWell(
                 onTap: () {
                   SubscriptionCallbackIW.of(context)?.onPurchase(data);
@@ -26,29 +28,38 @@ class SubscriptionPriceBox extends StatelessWidget {
                     child: Container(
                         margin: EdgeInsets.all(1),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            color: Theme.of(context).colorScheme.primaryContainer),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer),
                         child: Stack(
                           children: [
                             Align(
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: EdgeInsets.fromLTRB(0, context.spacing.xl, 0, context.spacing.xl),
+                                padding: EdgeInsets.fromLTRB(0,
+                                    context.spacing.xl, 0, context.spacing.xl),
                                 child: Column(
                                   children: [
                                     Text(
                                       data.durationTitle,
-                                      style: Theme.of(context).textTheme.bodyLarge,
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(context.spacing.s),
+                                      padding:
+                                          EdgeInsets.all(context.spacing.s),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(left: context.spacing.m, right: context.spacing.m),
+                                      padding: EdgeInsets.only(
+                                          left: context.spacing.m,
+                                          right: context.spacing.m),
                                       child: Text(
-                                        "${data.price} /${shouldBreakText ? "\n" : " "}${data.durationShort.replaceAll(" ", "\u{00A0}")}",
+                                        "${data.price} ${shouldBreakText ? "\n" : " "}${data.durationShort.replaceAll(" ", "\u{00A0}")}",
                                         textAlign: TextAlign.center,
-                                        style: Theme.of(context).textTheme.bodyMedium,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
                                       ),
                                     )
                                   ],
@@ -58,8 +69,11 @@ class SubscriptionPriceBox extends StatelessWidget {
                             data.dealPercentage > 0
                                 ? Container(
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                                        color: Theme.of(context).colorScheme.tertiary),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8.0)),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary),
                                     child: Padding(
                                       padding: EdgeInsets.all(4),
                                       child: Text(
@@ -67,7 +81,10 @@ class SubscriptionPriceBox extends StatelessWidget {
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall
-                                            ?.apply(color: Theme.of(context).colorScheme.onTertiary),
+                                            ?.apply(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onTertiary),
                                       ),
                                     ))
                                 : Container(),
