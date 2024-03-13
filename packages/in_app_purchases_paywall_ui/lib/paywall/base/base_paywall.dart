@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:in_app_purchases_interface/in_app_purchases_interface.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/default/default_purchase_handler.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/inherit/paywall_data_iw.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/inherit/subscription_callback_iw.dart';
-import 'package:in_app_purchases_paywall_ui/paywall/model/paywall_data.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/model/active_plan.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/model/icon_and_text.dart';
-import 'package:in_app_purchases_interface/in_app_purchases_interface.dart';
+import 'package:in_app_purchases_paywall_ui/paywall/model/paywall_data.dart';
 import 'package:in_app_purchases_paywall_ui/paywall/model/text_and_url.dart';
 import 'package:responsive_spacing/widgets/spacing.dart';
 
@@ -61,20 +61,24 @@ abstract class BasePaywall extends StatefulWidget {
     subscriptionListData?.sort((a, b) => a.index.compareTo(b.index));
 
     // Default handler if no callback is defined
-    var defaultHandler =
-        DefaultPurchaseHandler(initialPurchaseState: purchaseState, initialIsPurchaseInProgress: isPurchaseInProgress);
+    var defaultHandler = DefaultPurchaseHandler(
+        initialPurchaseState: purchaseState,
+        initialIsPurchaseInProgress: isPurchaseInProgress);
 
     // use this callbackInterface
     this.callbackInterface = callbackInterface ?? defaultHandler;
 
     // if callbackInterface implements the purchase State interface
     // set callbackInterface as PurchaseStream
-    if (purchaseStateStreamInterface == null && this.callbackInterface is PurchaseStateStreamInterface) {
+    if (purchaseStateStreamInterface == null &&
+        this.callbackInterface is PurchaseStateStreamInterface) {
       // set purchaseStream to callbackInterface
-      this.purchaseStateStreamInterface = this.callbackInterface as PurchaseStateStreamInterface;
+      this.purchaseStateStreamInterface =
+          this.callbackInterface as PurchaseStateStreamInterface;
     } else {
       // otherwise set the default handler
-      this.purchaseStateStreamInterface = purchaseStateStreamInterface ?? defaultHandler;
+      this.purchaseStateStreamInterface =
+          purchaseStateStreamInterface ?? defaultHandler;
     }
   }
 }
@@ -89,8 +93,10 @@ abstract class BasePaywallState<T extends BasePaywall> extends State<T> {
 
   @override
   void initState() {
-    purchaseStateStream = widget.purchaseStateStreamInterface.purchaseStateStream();
-    purchaseInProgressStream = widget.purchaseStateStreamInterface.purchaseInProgressStream();
+    purchaseStateStream =
+        widget.purchaseStateStreamInterface.purchaseStateStream();
+    purchaseInProgressStream =
+        widget.purchaseStateStreamInterface.purchaseInProgressStream();
     super.initState();
   }
 
@@ -107,45 +113,53 @@ abstract class BasePaywallState<T extends BasePaywall> extends State<T> {
             GlowingOverscrollIndicator(
                 axisDirection: AxisDirection.down,
                 color: Colors.red,
-                child: ListView(children: [
+                child: ListView(shrinkWrap: true, children: [
                   if (widget.headerContainer != null) widget.headerContainer!,
                   SubscriptionCallbackIW(
-                      /// This will wrap either the purchase widget or Success widget
-                      /// inside an inherited widget to pass the data to all children
-                      child: PaywallDataIW(
-                        /// returns either the Purchase Widget or the Success Widget
-                          child: StreamBuilder<PurchaseState>(
-                            stream: purchaseStateStream,
-                            builder: (context, snapshot) {
-                              // if there is no data yet, show a progress Indicator
-                              if (!snapshot.hasData) {
-                                return Container(height: 10000, width: 10000, child: Center(child: const CircularProgressIndicator()));
-                              }
+                    /// This will wrap either the purchase widget or Success widget
+                    /// inside an inherited widget to pass the data to all children
+                    child: PaywallDataIW(
 
-                              // if State is purchased
-                              if (snapshot.hasData && snapshot.data == PurchaseState.PURCHASED) {
-                                return buildSuccess(context);
-                              } else {
-                                // if state is not purchased yet
-                                return buildPaywall(context);
-                              }
-                            },
-                          ),
-                          paywallData: PaywallData(
-                              title: widget.title,
-                              subTitle: widget.subTitle,
-                              continueText: widget.continueText,
-                              tosData: widget.tosData,
-                              ppData: widget.ppData,
-                              bulletPoints: widget.bulletPoints,
-                              campaignWidget: widget.campaignWidget,
-                              restoreText: widget.restoreText,
-                              successTitle: widget.successTitle,
-                              successSubTitle: widget.successSubTitle,
-                              successWidget: widget.successWidget,
-                              activePlanList: widget.activePlanList)),
-                      callbackInterface: widget.callbackInterface,
-                      subscriptionListData: widget.subscriptionListData)
+                        /// returns either the Purchase Widget or the Success Widget
+                        child: StreamBuilder<PurchaseState>(
+                          stream: purchaseStateStream,
+                          builder: (context, snapshot) {
+                            // if there is no data yet, show a progress Indicator
+                            if (!snapshot.hasData) {
+                              return Container(
+                                  height: 10000,
+                                  width: 10000,
+                                  child: Center(
+                                      child:
+                                          const CircularProgressIndicator()));
+                            }
+
+                            // if State is purchased
+                            if (snapshot.hasData &&
+                                snapshot.data == PurchaseState.PURCHASED) {
+                              return buildSuccess(context);
+                            } else {
+                              // if state is not purchased yet
+                              return buildPaywall(context);
+                            }
+                          },
+                        ),
+                        paywallData: PaywallData(
+                            title: widget.title,
+                            subTitle: widget.subTitle,
+                            continueText: widget.continueText,
+                            tosData: widget.tosData,
+                            ppData: widget.ppData,
+                            bulletPoints: widget.bulletPoints,
+                            campaignWidget: widget.campaignWidget,
+                            restoreText: widget.restoreText,
+                            successTitle: widget.successTitle,
+                            successSubTitle: widget.successSubTitle,
+                            successWidget: widget.successWidget,
+                            activePlanList: widget.activePlanList)),
+                    callbackInterface: widget.callbackInterface,
+                    subscriptionListData: widget.subscriptionListData,
+                  )
                 ])),
 
             // LOADING INDICATOR
